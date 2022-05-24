@@ -44,3 +44,7 @@ The user can include the file `app_conf_custom.h` to customize the ble applicati
 By default the data length (max payload per BLE packet) is set to 27 bytes. This can cause fragmentation when transmitting large characteristics using a large ATT_MTU.
 To increase the data length user must define `CFG_BLE_ENABLE_SET_DATA_LENGTH` (in `app_conf_default.h`). Further more, the wanted data length must bbe set in same define - eg: `#define CFG_BLE_ENABLE_SET_DATA_LENGTH 251`. Valid range: 27 --> 251.
 **Note: if this is enabled the pheripheral will attempt to increase the HCI data length with every connected device! There is no guarantee all BLE devices support all sizes!**
+### HCI pending packet hack
+An error that occurs frequently is HCI._pendingPkt not being set to 0 before a new connection, which results in tanking the BLE.
+To hack around this the function `HCI::resetPendingPkt()` is added as public.
+**THIS FUNCTION SHOULD ONLY BE CALLED IN DISCONNECT CALLBACK!!!**
