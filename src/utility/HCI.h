@@ -103,6 +103,8 @@ public:
   int hciSetDataLength(uint16_t connectionHandle, uint16_t txOctects, uint16_t txTime);
   #endif // CFG_BLE_ENABLE_SET_DATA_LENGTH
 
+  void resetPendingPacket() { _pendingPkt = 0; }
+
 private:
   virtual int sendCommand(uint16_t opcode, uint8_t plen = 0, void* parameters = NULL);
 
